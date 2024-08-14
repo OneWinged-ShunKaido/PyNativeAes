@@ -16,15 +16,14 @@ message = b'Hello World'
 iv = b'\x00' * 16
 key = token_bytes(16)
 with NativeAes() as native_aes:
-  self.iv = iv
-  self.key = key
+  native_aes.iv = iv
+  native_aes.key = key
   encrypted_message = native_aes.encrypt(message)
   decrypted_message = native_aes.decrypt(encrypted_message)
 
 print(f'Encrypted -> {encrypted_message}')
 print(f'Decrypted -> {decrypted_message.decode()}')
 ```
-  
+![image](https://github.com/user-attachments/assets/0f1c84ad-26fe-4699-8aa4-2ee451da6388)
 
-![image](https://github.com/user-attachments/assets/9ba98c91-04d4-49b3-bd64-dcbe7f192cc0)
 
