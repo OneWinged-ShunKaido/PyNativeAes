@@ -6,8 +6,8 @@ message = b'Hello World'
 iv = b'\x00' * 16  # weak iv
 key = token_bytes(16)  #  usage of secrets lib not recommend at all !!
 with NativeAes() as native_aes:
-  self.iv = iv
-  self.key = key
+  native_aes.iv = iv
+  native_aes.key = key
   encrypted_message = native_aes.encrypt(message)
   decrypted_message = native_aes.decrypt(encrypted_message)
 
