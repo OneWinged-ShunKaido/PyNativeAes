@@ -1,5 +1,5 @@
 # PyNativeAes
-AES wrapper around the WIN32 API BCrypt library
+AES wrapper around the WIN32 API BCrypt library (https://learn.microsoft.com/fr-fr/windows/win32/api/bcrypt/)
 
 The idea here was to combine WIN32 API & Python to make a native AES cryption tool.
 
