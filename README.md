@@ -9,20 +9,26 @@ Fast for very smoll data blocks (~ Kb), otherwise **very very** slow...
 
 ```py
 from secrets import token_bytes
-from PyNativeAes import NativeAes
-#
+from lib.PyNativeAes import NativeAes
 
-message = b'Hello World'
-iv = b'\x00' * 16
-key = token_bytes(16)
-with NativeAes() as native_aes:
-  native_aes.iv = iv
-  native_aes.key = key
-  encrypted_message = native_aes.encrypt(message)
-  decrypted_message = native_aes.decrypt(encrypted_message)
+# Initialize the AES cipher with a specific mode
+native_aes = NativeAes(mode='CBC')
 
-print(f'Encrypted -> {encrypted_message}')
-print(f'Decrypted -> {decrypted_message.decode()}')
+# Configure padding options
+native_aes.PAD_ENCRYPTION_INPUT = True  # Enable padding for encryption input
+native_aes.PAD_DECRYPTION_OUTPUT = False  # Disable padding for decryption output
+
+key_encrypt = token_bytes(16)
+key_decrypt = token_bytes(16)
+
+cipher = native_aes.cipher(key=key_encrypt, iv=token_bytes(16))
+
+plaintext = 'Hello World'
+encrypted_text = cipher.encrypt(plaintext)
+decrypted_text = cipher.decrypt(encrypted_text)
+
+print(f"Decrypted text: {decrypted_text.decode()}")
+
 ```
 ![image](https://github.com/user-attachments/assets/0f1c84ad-26fe-4699-8aa4-2ee451da6388)
 
